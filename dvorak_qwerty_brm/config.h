@@ -1,0 +1,20 @@
+#define CHORDAL_HOLD
+#undef DEBOUNCE
+#define DEBOUNCE 20
+
+#undef TAPPING_TERM
+#define TAPPING_TERM 240
+
+#define PERMISSIVE_HOLD
+
+#define USB_SUSPEND_WAKEUP_DELAY 0
+#define SERIAL_NUMBER "W7Dz3/lbXRQ0"
+#define LAYER_STATE_8BIT
+#define COMBO_COUNT 2
+#define RAW_EPSIZE 32
+#define PAYLOAD_MARK 0x90
+#define PAYLOAD_BEGIN 24
+
+// Not required for Vial
+#define RAW_USAGE_PAGE 0xFF60
+#define RAW_USAGE 0x61
