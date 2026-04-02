@@ -10,6 +10,14 @@
  * edit it directly.
  */
 
+enum custom_keycodes {
+  TMUX_PASTE,
+  TMUX_BMENU,
+  TMUX_CMODE,
+};
+
+
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_split_3x5_3(
 		    KC_QUOT,         KC_COMM,        KC_DOT,         KC_P,     KC_Y,    			KC_F,      KC_G,         KC_C,         KC_R,         KC_L,
@@ -26,8 +34,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [2] = LAYOUT_split_3x5_3(
-		    KC_TRNS,         KC_TRNS,       KC_LBRC,      KC_RBRC,     KC_TRNS,				KC_BSLS,   KC_7,         KC_8,         KC_9,         KC_EQL,
-		    KC_TRNS,         KC_TRNS,       KC_LPRN,      KC_RPRN,     KC_TRNS,				KC_SLSH,   KC_4,         KC_5,         KC_6,         KC_MINS,
+		    KC_TRNS,         TMUX_PASTE,       KC_LBRC,      KC_RBRC,     KC_TRNS,				KC_BSLS,   KC_7,         KC_8,         KC_9,         KC_EQL,
+		    TMUX_BMENU,         TMUX_CMODE,       KC_LPRN,      KC_RPRN,     KC_TRNS,				KC_SLSH,   KC_4,         KC_5,         KC_6,         KC_MINS,
 		    KC_TRNS,   LGUI_T(KC_GRV), LSFT_T(KC_BSLS), LCTL_T(KC_SLSH), KC_TRNS,			KC_0,      RCTL_T(KC_1), RSFT_T(KC_2), RGUI_T(KC_3), RALT_T(KC_DOT),
 		                                    KC_TRNS,     KC_TRNS,      KC_TRNS,				KC_TRNS,   KC_TRNS,      KC_TRNS
 		    ),
@@ -46,6 +54,29 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM = LAYOUT_split_
   'R', 'R', 'R', 'R', 'R',
   '*', '*', '*'
 );
+
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case TMUX_PASTE:
+    if (record->event.pressed) {
+      SEND_STRING(SS_LCTL(SS_TAP(X_B))SS_DELAY(100)  SS_TAP(X_RBRC));
+    }
+    break;
+    case TMUX_BMENU:
+    if (record->event.pressed) {
+      SEND_STRING(SS_LCTL(SS_TAP(X_B))SS_DELAY(100)  SS_TAP(X_EQL));
+    }
+    break;
+    case TMUX_CMODE:
+    if (record->event.pressed) {
+      SEND_STRING(SS_LCTL(SS_TAP(X_B))SS_DELAY(100)  SS_TAP(X_LBRC));
+    }
+    break;
+
+  }
+  return true;
+}
 
 
 #ifdef OTHER_KEYMAP_C
