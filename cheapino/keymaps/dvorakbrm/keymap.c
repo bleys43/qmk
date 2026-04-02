@@ -2,6 +2,7 @@
 #if __has_include("keymap.h")
 #    include "keymap.h"
 #endif
+#include "raw_hid.h"
 
 
 /* THIS FILE WAS GENERATED!
@@ -86,6 +87,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   }
   return true;
+
+
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    uint8_t hi_layer = get_highest_layer(state);
+    uint8_t response[RAW_EPSIZE];
+    memset(response, 0x00, RAW_EPSIZE);
+    response[PAYLOAD_BEGIN] = PAYLOAD_MARK;
+    response[PAYLOAD_BEGIN + 1] = hi_layer;
+    raw_hid_send(response, RAW_EPSIZE);
+    return state;
 }
 
 
