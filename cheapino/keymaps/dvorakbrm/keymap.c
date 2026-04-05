@@ -42,12 +42,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		    ),
 
     [3] = LAYOUT_split_3x5_3(
-		    KC_TRNS,         KC_F7,         KC_F8,            KC_F9,   KC_F12, 				KC_TRNS,   KC_BRIGHTNESS_UP,KC_MEDIA_REWIND,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_FAST_FORWARD,
-		    KC_TRNS,         KC_F4,         KC_F5,            KC_F6,   KC_F11,				KC_TRNS,   KC_BRIGHTNESS_DOWN,KC_AUDIO_MUTE,  KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,
+		    KC_TRNS,         KC_F7,         KC_F8,            KC_F9,   KC_F12, 				KC_BRIU,   KC_MRWD,      KC_MPLY,      KC_MFFD,      KC_TRNS,   
+		    KC_TRNS,         KC_F4,         KC_F5,            KC_F6,   KC_F11,				KC_BRID,   KC_MUTE,      KC_VOLD,      KC_VOLU,      KC_TRNS,
 		    KC_TRNS,         KC_F1,         KC_F2,            KC_F3,   KC_F10,				KC_TRNS,   KC_TRNS,      KC_TRNS,      KC_TRNS,      KC_TRNS,
 		    		                    KC_TRNS,     KC_TRNS,      KC_TRNS,				KC_TRNS,   KC_TRNS,      KC_TRNS
 		    ),
-    [4] = LAYOUT_split_3x5_3(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS)
+    [4] = LAYOUT_split_3x5_3(
+		    QK_BOOT,         KC_TRNS,       KC_TRNS,          KC_TRNS, KC_DEL,				KC_TRNS,   MS_WHLL,      MS_WHLD,      MS_WHLU,      MS_WHLR,
+		    QK_RBT,         KC_TRNS,       KC_TRNS,          KC_TRNS,  KC_TRNS,			KC_TRNS,   MS_LEFT,      MS_DOWN,      MS_UP,        MS_RGHT,
+		    KC_TRNS,         KC_TRNS,       KC_TRNS,          KC_TRNS, KC_TRNS,				KC_TRNS,   KC_TRNS,      KC_TRNS,      KC_TRNS,      KC_TRNS,
+		    		                    KC_TRNS,     KC_TRNS,      KC_TRNS,				MS_BTN1,   MS_BTN2,      KC_TRNS
+    )
 };
 
 const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM = LAYOUT_split_3x5_3(
@@ -62,9 +67,11 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM = LAYOUT_split_
 );
 
 const uint16_t PROGMEM combo0[] = { KC_BSPC, KC_SPACE, COMBO_END};
+const uint16_t PROGMEM combo1[] = { KC_BSPC, KC_ENT, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo0, OSL(3)),
+    COMBO(combo1, OSL(4)),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
