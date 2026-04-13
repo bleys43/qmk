@@ -12,8 +12,8 @@
  */
 
 enum custom_keycodes {
-  TMUX_PASTE,
-  TMUX_BMENU,
+  TMUX_PASTE = SAFE_RANGE,
+  TMUX_MENU,
   TMUX_CMODE,
 };
 
@@ -35,8 +35,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [2] = LAYOUT_split_3x5_3(
-		    KC_TRNS,         TMUX_PASTE,       KC_LBRC,      KC_RBRC,     KC_TRNS,				KC_BSLS,   KC_7,         KC_8,         KC_9,         KC_EQL,
-		    TMUX_BMENU,         TMUX_CMODE,       KC_LPRN,      KC_RPRN,     KC_TRNS,				KC_SLSH,   KC_4,         KC_5,         KC_6,         KC_MINS,
+		    TMUX_MENU,         TMUX_PASTE,       KC_LBRC,      KC_RBRC,     KC_TRNS,				KC_BSLS,   KC_7,         KC_8,         KC_9,         KC_EQL,
+		    TMUX_MENU,         TMUX_CMODE,       KC_LPRN,      KC_RPRN,     KC_TRNS,				KC_SLSH,   KC_4,         KC_5,         KC_6,         KC_MINS,
 		    KC_TRNS,   LGUI_T(KC_GRV), LSFT_T(KC_BSLS), LCTL_T(KC_SLSH), KC_TRNS,			KC_0,      RCTL_T(KC_1), RSFT_T(KC_2), RGUI_T(KC_3), RALT_T(KC_DOT),
 		                                    KC_TRNS,     KC_TRNS,      KC_TRNS,				KC_TRNS,   KC_TRNS,      KC_TRNS
 		    ),
@@ -81,7 +81,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       SEND_STRING(SS_LCTL(SS_TAP(X_B))SS_DELAY(100)  SS_TAP(X_RBRC));
     }
     break;
-    case TMUX_BMENU:
+    case TMUX_MENU:
     if (record->event.pressed) {
       SEND_STRING(SS_LCTL(SS_TAP(X_B))SS_DELAY(100)  SS_TAP(X_EQL));
     }

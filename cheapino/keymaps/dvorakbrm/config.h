@@ -4,6 +4,7 @@
 #define PAYLOAD_BEGIN 24
 #define CHORDAL_HOLD
 #define PERMISSIVE_HOLD
+#define FLOW_TAP_TERM 150
 
 // Not required for Vial
 #define RAW_USAGE_PAGE 0xFF60
