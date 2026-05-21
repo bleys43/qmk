@@ -15,39 +15,55 @@ enum custom_keycodes {
   TMUX_PASTE = SAFE_RANGE,
   TMUX_MENU,
   TMUX_CMODE,
+  TMUX_PANE_L,
+  TMUX_PANE_D,
+  TMUX_PANE_U,
+  TMUX_PANE_R,
+  TMUX_HSPLIT,
+  TMUX_VSPLIT,
+};
+
+enum layers {
+  _DVORAK,
+  _NAV,
+  _NUMSYM,
+  _FUNC,
+  _MOUSE
 };
 
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [0] = LAYOUT_split_3x5_3(
+// Dvorak
+    [_DVORAK] = LAYOUT_split_3x5_3(
 		    KC_QUOT,         KC_COMM,        KC_DOT,         KC_P,     KC_Y,    			KC_F,      KC_G,         KC_C,         KC_R,         KC_L,
 		    KC_A,            KC_O,           KC_E,           KC_U,     KC_I,				KC_D,      KC_H,         KC_T,         KC_N,         KC_S,
 		    LALT_T(KC_SCLN), LGUI_T(KC_Q), LSFT_T(KC_J), LCTL_T(KC_K), KC_X, 				KC_B,      RCTL_T(KC_M), RSFT_T(KC_W), RGUI_T(KC_V), RALT_T(KC_Z),
-		                                     OSL(2),     KC_BSPC,      LT(1,KC_ESC),			KC_ENT,    KC_SPC,       OSL(2)
+		                                    OSL(2),  KC_BSPC,  LT(1,KC_ESC),		KC_ENT,  KC_SPC,  OSL(2)
     ),
-
-    [1] = LAYOUT_split_3x5_3(
-		    LCA(KC_DEL),     KC_TRNS,       LCS(KC_TAB), LCTL(KC_TAB), KC_DEL,				KC_TRNS,   KC_HOME,      KC_PGDN,      KC_PGUP,      KC_END,
-		    KC_TRNS,         KC_LALT,       LSFT(KC_TAB),     KC_TAB,  KC_CAPS,				KC_TRNS,   KC_LEFT,      KC_DOWN,      KC_UP,        KC_RGHT,
-		    KC_TRNS,         KC_TRNS,       KC_TRNS,   LCTL_T(KC_INS), CW_TOGG,				KC_TRNS,   KC_TRNS,      KC_TRNS,      KC_TRNS,      KC_TRNS,
+// Navigation
+    [_NAV] = LAYOUT_split_3x5_3(
+		    LCA(KC_DEL),     KC_TRNS,       LCS(KC_TAB), LCTL(KC_TAB), KC_DEL,				KC_PSCR,   KC_HOME,      KC_PGDN,      KC_PGUP,      KC_END,
+		    KC_TRNS,         KC_LALT,       LSFT(KC_TAB),     KC_TAB,  KC_CAPS,				TMUX_VSPLIT,   KC_LEFT,      KC_DOWN,      KC_UP,        KC_RGHT,
+		    KC_TRNS,         KC_TRNS,       KC_TRNS,   LCTL_T(KC_INS), CW_TOGG,				TMUX_HSPLIT,   TMUX_PANE_L,  TMUX_PANE_D,  TMUX_PANE_U,  TMUX_PANE_R,
 		    		                    KC_TRNS,     KC_TRNS,      KC_TRNS,				KC_TRNS,   KC_TRNS,      KC_TRNS
     ),
-
-    [2] = LAYOUT_split_3x5_3(
+// NumSym
+    [_NUMSYM] = LAYOUT_split_3x5_3(
 		    TMUX_MENU,         TMUX_PASTE,       KC_LBRC,      KC_RBRC,     KC_TRNS,				KC_BSLS,   KC_7,         KC_8,         KC_9,         KC_EQL,
 		    TMUX_MENU,         TMUX_CMODE,       KC_LPRN,      KC_RPRN,     KC_TRNS,				KC_SLSH,   KC_4,         KC_5,         KC_6,         KC_MINS,
 		    KC_TRNS,   LGUI_T(KC_GRV), LSFT_T(KC_BSLS), LCTL_T(KC_SLSH), KC_TRNS,			KC_0,      RCTL_T(KC_1), RSFT_T(KC_2), RGUI_T(KC_3), RALT_T(KC_DOT),
 		                                    KC_TRNS,     KC_TRNS,      KC_TRNS,				KC_TRNS,   KC_TRNS,      KC_TRNS
 		    ),
-
-    [3] = LAYOUT_split_3x5_3(
+// Function
+    [_FUNC] = LAYOUT_split_3x5_3(
 		    KC_TRNS,         KC_F7,         KC_F8,            KC_F9,   KC_F12, 				KC_BRIU,   KC_MRWD,      KC_MPLY,      KC_MFFD,      KC_TRNS,   
 		    KC_TRNS,         KC_F4,         KC_F5,            KC_F6,   KC_F11,				KC_BRID,   KC_MUTE,      KC_VOLD,      KC_VOLU,      KC_TRNS,
 		    KC_TRNS,         KC_F1,         KC_F2,            KC_F3,   KC_F10,				KC_TRNS,   KC_TRNS,      KC_TRNS,      KC_TRNS,      KC_TRNS,
 		    		                    KC_TRNS,     KC_TRNS,      KC_TRNS,				KC_TRNS,   KC_TRNS,      KC_TRNS
 		    ),
-    [4] = LAYOUT_split_3x5_3(
+// Mouse
+    [_MOUSE] = LAYOUT_split_3x5_3(
 		    QK_BOOT,         KC_TRNS,       KC_TRNS,          KC_TRNS, KC_DEL,				KC_TRNS,   MS_WHLL,      MS_WHLD,      MS_WHLU,      MS_WHLR,
 		    QK_RBT,         KC_TRNS,       KC_TRNS,          KC_TRNS,  KC_TRNS,			KC_TRNS,   MS_LEFT,      MS_DOWN,      MS_UP,        MS_RGHT,
 		    KC_TRNS,         KC_TRNS,       KC_TRNS,          KC_TRNS, KC_TRNS,				KC_TRNS,   KC_TRNS,      KC_TRNS,      KC_TRNS,      KC_TRNS,
@@ -69,10 +85,12 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM = LAYOUT_split_
 const uint16_t PROGMEM combo0[] = { KC_BSPC, KC_SPACE, COMBO_END};
 const uint16_t PROGMEM combo1[] = { KC_BSPC, KC_ENT, COMBO_END};
 
+
 combo_t key_combos[COMBO_COUNT] = {
-    COMBO(combo0, OSL(3)),
-    COMBO(combo1, OSL(4)),
+    COMBO(combo0, OSL(_FUNC)),
+    COMBO(combo1, OSL(_MOUSE)),
 };
+
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -89,6 +107,36 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case TMUX_CMODE:
     if (record->event.pressed) {
       SEND_STRING(SS_LCTL(SS_TAP(X_B))SS_DELAY(100)  SS_TAP(X_LBRC));
+    }
+    break;
+    case TMUX_PANE_L:
+    if (record->event.pressed) {
+      SEND_STRING(SS_LCTL(SS_TAP(X_B))SS_DELAY(100)  SS_TAP(X_H));
+    }
+    break;
+    case TMUX_PANE_D:
+    if (record->event.pressed) {
+      SEND_STRING(SS_LCTL(SS_TAP(X_B))SS_DELAY(100)  SS_TAP(X_T));
+    }
+    break;
+    case TMUX_PANE_U:
+    if (record->event.pressed) {
+      SEND_STRING(SS_LCTL(SS_TAP(X_B))SS_DELAY(100)  SS_TAP(X_N));
+    }
+    break;
+    case TMUX_PANE_R:
+    if (record->event.pressed) {
+      SEND_STRING(SS_LCTL(SS_TAP(X_B))SS_DELAY(100)  SS_TAP(X_S));
+    }
+    break;
+    case TMUX_HSPLIT:
+    if (record->event.pressed) {
+      SEND_STRING(SS_LCTL(SS_TAP(X_B))SS_DELAY(100)  SS_RSFT(SS_TAP(X_QUOT)));
+    }
+    break;
+    case TMUX_VSPLIT:
+    if (record->event.pressed) {
+      SEND_STRING(SS_LCTL(SS_TAP(X_B))SS_DELAY(100)  SS_RSFT(SS_TAP(X_5)));
     }
     break;
 
