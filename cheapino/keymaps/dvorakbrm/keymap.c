@@ -41,7 +41,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		    KC_QUOT,         KC_COMM,        KC_DOT,         KC_P,     KC_Y,    			KC_F,      KC_G,         KC_C,         KC_R,         KC_L,
 		    KC_A,            KC_O,           KC_E,           KC_U,     KC_I,				KC_D,      KC_H,         KC_T,         KC_N,         KC_S,
 		    LALT_T(KC_SCLN), LGUI_T(KC_Q), LSFT_T(KC_J), LCTL_T(KC_K), KC_X, 				KC_B,      RCTL_T(KC_M), RSFT_T(KC_W), RGUI_T(KC_V), RALT_T(KC_Z),
-		                                    OS_LSFT,  KC_BSPC,  LT(1,KC_ESC),		KC_ENT,  KC_SPC,  RL_NUMSYM
+		                                    OS_LSFT,  KC_BSPC,  LT(_NAV,KC_ESC),		KC_ENT,  KC_SPC,  RL_NUMSYM
     ),
 // Navigation
     [_NAV] = LAYOUT_split_3x5_3(
@@ -84,12 +84,13 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM = LAYOUT_split_
   '*', '*', '*'
 );
 
+// combo definitions
 const uint16_t PROGMEM combo0[] = { KC_BSPC, KC_SPACE, COMBO_END};
 const uint16_t PROGMEM combo1[] = { KC_BSPC, KC_ENT, COMBO_END};
 //const uint16_t PROGMEM combo2[] = { KC_E, KC_BSPC, COMBO_END};
 //const uint16_t PROGMEM combo3[] = { KC_SPC, KC_T, COMBO_END};
 
-
+// combo outputs
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo0, OSL(_FUNC)),
     COMBO(combo1, OSL(_MOUSE)),
@@ -97,7 +98,17 @@ combo_t key_combos[COMBO_COUNT] = {
     //COMBO(combo3, OS_RSFT),
 };
 
+// per-key tapping term definitions
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LT(_NAV, KC_ESC):
+            return 50;
+        default:
+            return TAPPING_TERM;
+    }
+}
 
+// Macro definitions function
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case TMUX_PASTE:
@@ -152,6 +163,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 }
 
+// keymap layer companion function
 layer_state_t layer_state_set_user(layer_state_t state) {
     uint8_t hi_layer = get_highest_layer(state);
     uint8_t response[RAW_EPSIZE];
