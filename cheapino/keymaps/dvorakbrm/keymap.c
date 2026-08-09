@@ -61,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 // NumSym
     [_NUMSYM] = LAYOUT_split_3x5_3(
-		    TMUX_QUOT,         TMUX_PASTE,       KC_LBRC,      KC_RBRC,     KC_TRNS,				KC_BSLS,   KC_7,         KC_8,         KC_9,         KC_EQL,
+		    KC_QUOT,         TMUX_PASTE,       KC_LBRC,      KC_RBRC,     KC_TRNS,				KC_BSLS,   KC_7,         KC_8,         KC_9,         KC_EQL,
 		    TMUX_MENU,         TMUX_CMODE,       KC_LPRN,      KC_RPRN,     KC_TRNS,				KC_SLSH,   KC_4,         KC_5,         KC_6,         KC_MINS,
 		    KC_TRNS,   LGUI_T(KC_GRV), LSFT_T(KC_BSLS), LCTL_T(KC_SLSH), KC_TRNS,			KC_0,      RCTL_T(KC_1), RSFT_T(KC_2), RGUI_T(KC_3), RALT_T(KC_DOT),
 		                                    KC_TRNS,     KC_TRNS,      KC_TRNS,				KC_TRNS,   KC_TRNS,      KC_TRNS
@@ -103,7 +103,7 @@ const uint16_t PROGMEM combo2[] = { KC_ENT, LT(_NAV,KC_ESC), COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo0, OSL(_FUNC)),
     COMBO(combo1, OSL(_MOUSE)),
-    COMBO(combo2, TG(_QWERTY)),
+    COMBO(combo2, TG(_QWERTY))
 };
 
 // per-key tapping term definitions

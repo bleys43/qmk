@@ -1,4 +1,4 @@
-#define COMBO_COUNT 2
+#define COMBO_COUNT 3
 #define RAW_EPSIZE 32
 #define PAYLOAD_MARK 0x90
 #define PAYLOAD_BEGIN 24
