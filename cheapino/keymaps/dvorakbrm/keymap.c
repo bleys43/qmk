@@ -27,6 +27,7 @@ enum custom_keycodes {
 
 enum layers {
   _DVORAK,
+  _QWERTY,
   _NAV,
   _NUMSYM,
   _FUNC,
@@ -43,16 +44,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		    LALT_T(KC_SCLN), LGUI_T(KC_Q), LSFT_T(KC_J), LCTL_T(KC_K), KC_X, 				KC_B,      RCTL_T(KC_M), RSFT_T(KC_W), RGUI_T(KC_V), RALT_T(KC_Z),
 		                                    OS_LSFT,  KC_BSPC,  LT(_NAV,KC_ESC),		KC_ENT,  KC_SPC,  RL_NUMSYM
     ),
+// Qwerty
+    [_QWERTY] = LAYOUT_split_3x5_3(
+		    KC_Q,         KC_W,        KC_E,         KC_R,     KC_T,    			KC_Y,      KC_U,         KC_I,         KC_O,         KC_P,
+		    KC_A,            KC_S,           KC_D,           KC_F,     KC_G,				KC_H,      KC_J,         KC_K,         KC_L,         KC_SCLN,
+		    LALT_T(KC_Z), LGUI_T(KC_X), LSFT_T(KC_C), LCTL_T(KC_V), KC_B, 				KC_N,      RCTL_T(KC_M), RSFT_T(KC_COMM), RGUI_T(KC_DOT), RALT_T(KC_SLSH),
+		                                    OS_LSFT,  KC_BSPC,  LT(_NAV,KC_ESC),		KC_ENT,  KC_SPC,  RL_NUMSYM
+    ),
+
 // Navigation
     [_NAV] = LAYOUT_split_3x5_3(
 		    LCA(KC_DEL),     KC_TRNS,       LCS(KC_TAB), LCTL(KC_TAB), KC_DEL,				KC_PSCR,   KC_HOME,      KC_PGDN,      KC_PGUP,      KC_END,
-		    KC_TRNS,         KC_LALT,       LSFT(KC_TAB),     KC_TAB,  KC_CAPS,				TMUX_VSPLIT,   KC_LEFT,      KC_DOWN,      KC_UP,        KC_RGHT,
-		    KC_TRNS,         KC_TRNS,       KC_TRNS,   LCTL_T(KC_INS), CW_TOGG,				TMUX_HSPLIT,   TMUX_PANE_L,  TMUX_PANE_D,  TMUX_PANE_U,  TMUX_PANE_R,
+		    KC_TRNS,         KC_LALT,       LSFT(KC_TAB),     KC_TAB,  KC_TRNS,				TMUX_VSPLIT,   KC_LEFT,      KC_DOWN,      KC_UP,        KC_RGHT,
+		    KC_TRNS,         KC_TRNS,       KC_TRNS,   LCTL_T(KC_INS), KC_TRNS,				TMUX_HSPLIT,   TMUX_PANE_L,  TMUX_PANE_D,  TMUX_PANE_U,  TMUX_PANE_R,
 		    		                    KC_TRNS,     KC_TRNS,      KC_TRNS,				KC_TRNS,   KC_TRNS,      KC_TRNS
     ),
 // NumSym
     [_NUMSYM] = LAYOUT_split_3x5_3(
-		    TMUX_MENU,         TMUX_PASTE,       KC_LBRC,      KC_RBRC,     KC_TRNS,				KC_BSLS,   KC_7,         KC_8,         KC_9,         KC_EQL,
+		    TMUX_QUOT,         TMUX_PASTE,       KC_LBRC,      KC_RBRC,     KC_TRNS,				KC_BSLS,   KC_7,         KC_8,         KC_9,         KC_EQL,
 		    TMUX_MENU,         TMUX_CMODE,       KC_LPRN,      KC_RPRN,     KC_TRNS,				KC_SLSH,   KC_4,         KC_5,         KC_6,         KC_MINS,
 		    KC_TRNS,   LGUI_T(KC_GRV), LSFT_T(KC_BSLS), LCTL_T(KC_SLSH), KC_TRNS,			KC_0,      RCTL_T(KC_1), RSFT_T(KC_2), RGUI_T(KC_3), RALT_T(KC_DOT),
 		                                    KC_TRNS,     KC_TRNS,      KC_TRNS,				KC_TRNS,   KC_TRNS,      KC_TRNS
@@ -87,15 +96,14 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM = LAYOUT_split_
 // combo definitions
 const uint16_t PROGMEM combo0[] = { KC_BSPC, KC_SPACE, COMBO_END};
 const uint16_t PROGMEM combo1[] = { KC_BSPC, KC_ENT, COMBO_END};
-//const uint16_t PROGMEM combo2[] = { KC_E, KC_BSPC, COMBO_END};
+const uint16_t PROGMEM combo2[] = { KC_ENT, LT(_NAV,KC_ESC), COMBO_END};
 //const uint16_t PROGMEM combo3[] = { KC_SPC, KC_T, COMBO_END};
 
 // combo outputs
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo0, OSL(_FUNC)),
     COMBO(combo1, OSL(_MOUSE)),
-    //COMBO(combo2, OS_LSFT),
-    //COMBO(combo3, OS_RSFT),
+    COMBO(combo2, TG(_QWERTY)),
 };
 
 // per-key tapping term definitions
