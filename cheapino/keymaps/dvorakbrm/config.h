@@ -6,7 +6,7 @@
 #define PERMISSIVE_HOLD
 #define FLOW_TAP_TERM 150
 #define TAPPING_TERM_PER_KEY
-#define ONESHOT_TAP_TOGGLE 3
+#define ONESHOT_TAP_TOGGLE 2
 
 // Not required for Vial
 #define RAW_USAGE_PAGE 0xFF60
